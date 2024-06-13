@@ -19,7 +19,7 @@ if(BUILD_TESTS)
 else()
     set(SOURCES
         main.cpp
-        Divider.cpp
+        divider.cpp
     )
     add_executable(Cpp-Software-Design ${SOURCES})
 endif()
