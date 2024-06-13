@@ -1,20 +1,27 @@
 #include <iostream>
-#include "calc.hpp"
+#include "Divider.hpp"
+
+double Divider::divideNumbers(double num1, double num2) {
+    if (num2 == 0) {
+        std::cout << "Ошибка: деление на ноль невозможно." << std::endl;
+        return 0;
+    }
+    return num1 / num2;
+}
 
 int main() {
-    Calculator calc;
-    double num1, num2;
+    double number1, number2;
 
     std::cout << "Введите первое число: ";
-    std::cin >> num1;
+    std::cin >> number1;
 
     std::cout << "Введите второе число: ";
-    std::cin >> num2;
+    std::cin >> number2;
 
-    double result = calc.divide(num1, num2);
-    if (num2 != 0) {
-        std::cout << "Результат деления: " << result << std::endl;
-    }
+    Divider divider;
+    double result = divider.divideNumbers(number1, number2);
+
+    std::cout << "Результат деления: " << result << std::endl;
 
     return 0;
 }
