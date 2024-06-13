@@ -1,14 +1,25 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.4)
+project(Cpp-Software-Design)
+option(BUILD_TESTS "Build tests" OFF)
 
-project(DividerTest)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_CXX_STANDARD 11)
-
-# Добавляем исполняемый файл для тестирования
-add_executable(DividerTest main.cpp)
-
-# Добавляем библиотеку с классом Divider
-add_library(Divider divider.cpp)
-
-# Линковка исполняемого файла с библиотекой Divider
-target_link_libraries(DividerTest Divider)
+if(BUILD_TESTS)
+    include_directories(.)
+    enable_testing()
+    add_subdirectory(third-party/gtest)
+    file(GLOB tests "tests/*.cpp")
+    foreach(test ${tests})
+         get_filename_component(test_name ${test} NAME_WE)
+         add_executable(check ${test})
+         target_link_libraries(check gtest_main gmock_main)
+         add_test(NAME check COMMAND check)
+    endforeach(test)
+else()
+    set(SOURCES
+        main.cpp
+        Divider.cpp
+    )
+    add_executable(Cpp-Software-Design ${SOURCES})
+endif()
