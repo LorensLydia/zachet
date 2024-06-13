@@ -1,4 +1,4 @@
-#include "Divider.hpp"
+#include "divider.hpp"
 #include <iostream>
 
 Divider::Divider() {}
